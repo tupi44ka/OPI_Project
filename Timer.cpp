@@ -2,26 +2,10 @@
 #include <Windows.h>
 #include <thread>
 #include <chrono>
-#include "HeaderTEST.h"
-/*
-to do list:
-	1) получать значени€ некоторых переменных извне
-	2) ...
-*/
+#include "Header.h"
 
-/*“аймер каждый раз устанавливает курсор в начало,
-с этим могут возникнуть проблемы дл€ отрисовки остального ? ? ? 
-(чтобы рисовать дальше возможно нужно принудительно двигать
-курсор на 6 или 7 (лучше наверное 7 чтобы был пробельчик) строку)
-
-ƒаник разберись короче*/
-
-int timer() {
-	const int T = 1; // оличество минут, что отсчитает таймер
+int timer(int& T) {
 	const COORD cord = { 0, 0 }; //позици€ с которой рисуютс€ цифры
-	const bool isWin = false; //переменна€, что обрубит таймер досрочно
-	//SetConsoleCP(1251);
-	//SetConsoleOutputCP(1251);
 
 	char num0[15] = {
 		'#', '#', '#',
@@ -102,12 +86,12 @@ int timer() {
 	};
 	char* numbers[10] = { num0,num1,num2,num3,num4,num5,num6,num7,num8,num9 };
 
-	int Min = 0, Sec = 0, tenMin = 0, tenSec = 0;;
+	static int Min = 0, Sec = 0, tenMin = 0, tenSec = 0;;
 
 	int time = 0;
 	char* NowTime[5];
 	NowTime[2] = divide;
-	while (time <= T * 60) {
+	//while (time <= T * 60) {
 		NowTime[0] = numbers[tenMin]; NowTime[1] = numbers[Min]; NowTime[3] = numbers[tenSec]; NowTime[4] = numbers[Sec];
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cord);
 
@@ -125,10 +109,10 @@ int timer() {
 		if (Sec == 10) { Sec = 0; tenSec++; }
 		if (tenSec == 6) { tenSec = 0; Min++; }
 		if (Min == 10) { Min = 0; tenMin++; }
-		if (isWin) { return 0; } //что возвращать?
+		//if (isWin) { return 0; } //что возвращать?
 
-		std::this_thread::sleep_for(std::chrono::seconds(1)); time++;
-	}
+		time++;
+	//}
 
 	return 0; //что-то возвращать по исходу функции? (код проигрыша наверное)
 }
