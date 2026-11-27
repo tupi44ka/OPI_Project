@@ -92,27 +92,26 @@ int timer(int& T) {
 	char* NowTime[5];
 	NowTime[2] = divide;
 	//while (time <= T * 60) {
-		NowTime[0] = numbers[tenMin]; NowTime[1] = numbers[Min]; NowTime[3] = numbers[tenSec]; NowTime[4] = numbers[Sec];
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cord);
+	NowTime[0] = numbers[tenMin]; NowTime[1] = numbers[Min]; NowTime[3] = numbers[tenSec]; NowTime[4] = numbers[Sec];
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cord);
 
-		for (int j = 0; j < 5; j++) {
-			for (int i = 0; i < 5; i++) {
-				for (int k = 0; k < 3; k++) {
-					std::cout << NowTime[i][j * 3 + k] << std::flush;
-				}
-				std::cout << " ";
+	for (int j = 0; j < 5; j++) {
+		for (int i = 0; i < 5; i++) {
+			for (int k = 0; k < 3; k++) {
+				std::cout << NowTime[i][j * 3 + k] << std::flush;
 			}
-			std::cout << "\n";
+			std::cout << " ";
 		}
+		std::cout << "\n";
+	}
 
-		Sec++;
-		if (Sec == 10) { Sec = 0; tenSec++; }
-		if (tenSec == 6) { tenSec = 0; Min++; }
-		if (Min == 10) { Min = 0; tenMin++; }
-		//if (isWin) { return 0; } //что возвращать?
+	Sec++;
+	if (Sec == 10) { Sec = 0; tenSec++; }
+	if (tenSec == 6) { tenSec = 0; Min++; }
+	if (Min == 10) { Min = 0; tenMin++; }
+	
 
-		time++;
-	//}
-
-	return 0; //что-то возвращать по исходу функции? (код проигрыша наверное)
+	time++;
+	
+	return 0;
 }
